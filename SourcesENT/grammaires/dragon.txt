@@ -1,0 +1,6 @@
+dragon
+4
+0
+FX
+Y->-FX-Y
+X->X+YF+
