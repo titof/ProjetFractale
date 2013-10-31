@@ -13,7 +13,7 @@ void grammaire_lire(char *nomfic, Grammaire *g){
     printf("Ouverture du fichier %s impossible\n", nomfic);
     exit(2);
   }
-  /* lecture nom de a fractale */
+  /* lecture nom de la fractale */
   fscanf(pfo, "%s\n",g->titre);
   /* lecture nombre de directions */
   fscanf(pfo,"%d\n",&(g->turtle_dir_max));
@@ -49,4 +49,19 @@ void grammaire_afficher(Grammaire g)
       printf("%c->%s\n", g.car[i], g.regle[i]);
       i++;
     }
+}
+
+void grammaire_trouver(Grammaire *g, char cmd){
+
+ FILE *pfo ;
+ int i=0;
+ tab = malloc( sizeof char);
+ while (fscanf(pfo, "%c ->%s\n", &(g->car[g->nb_dir]),g->regle[g->nb_dir]) != (EOF)){
+ 	if (fscanf(pfo, "%c",commande)==cmd){
+	 
+	}
+ }
+
+
+
 }
