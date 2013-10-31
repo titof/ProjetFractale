@@ -8,6 +8,23 @@
 #include "tools.h"
 
 
+
+
+
+/* Interpretation initialiser : initialiser l'interpreteur */
+void inter_init(Interprete *inter)
+{
+  *inter.*mot=NULL;
+  *inter.taille=NULL;
+  *inter.xmin=NULL;
+  *inter.ymin=NULL;
+  *inter.xmax=NULL;
+  *inter.ymax=NULL;
+
+}
+
+
+
 /*
   Interpretation graphique : dessin de la chaîne générée
 */
@@ -70,3 +87,39 @@ void inter_interpreter(Interprete *inter, float factor, Tortue *tortue, char *no
 }
 
 
+/*Permet de generer le mot correspondant à une grammaire et à un niveau de developpement*/
+
+int inter_generer(int niveau_max, Grammaire *g, Interprete *t)
+{
+  *t.*mot= /*Axiome a mettre ici*/
+  
+
+
+}
+
+/*Permet de supprimer du mot courant tous les caractères qui ne sont pas interprétés graphiquement
+ (donc tous les caractères sauf F,f,+,-,[ et ]) */
+
+void inter_nettoyer(Interprete *inter){
+ 
+}
+
+
+/*Interprète graphiquement le mot, sans toutefois générer de dessin, afin de mettre à jour les champs de l'interpréteur
+permettant de gérer la boite englobante*/
+void inter_calc_dim(Interprete *inter, Tortue *tortue)
+{
+
+}
+
+/*Permet l'exécution d'une seule commande graphique, en mettant à jour la pile et la tortue utilisées.*/
+Pile inter_transition(Pile p, char cmd, Tortue *tortue)
+{
+
+}
+
+/*Permet de libérer les ressources dynamiques utilisées par la structure.*/
+void inter_liberer(Interprete *inter)
+{
+
+}
