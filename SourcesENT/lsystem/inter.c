@@ -129,6 +129,8 @@ void inter_nettoyer(Interprete *inter){
 permettant de gérer la boite englobante*/
 void inter_calc_dim(Interprete *inter, Tortue *tortue)
 {
+  inter_nettoyer(inter);
+
   inter->xmin=tortue->x*tortue->co*tortue->dir;
   inter->ymin=tortue->y*tortue->si*tortue->dir;
   inter->xmax=tortue->x*tortue->co*tortue->dir_max;
@@ -138,7 +140,13 @@ void inter_calc_dim(Interprete *inter, Tortue *tortue)
 /*Permet l'exécution d'une seule commande graphique, en mettant à jour la pile et la tortue utilisées.*/
 Pile inter_transition(Pile p, char cmd, Tortue *tortue)
 {
-					/*A FAIRE*/
+  if(cmd=='['){
+    pile_empiler(p,tortue);
+  }
+  
+  if(cmd==']'){
+    pile_depiler(p,tortue);
+  }					/*A VERIFIER*/
 }
 
 /*Permet de libérer les ressources dynamiques utilisées par la structure.*/
