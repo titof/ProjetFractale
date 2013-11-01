@@ -14,12 +14,12 @@
 /* Interpretation initialiser : initialiser l'interpreteur */
 void inter_init(Interprete *inter)
 {
-  *inter.*mot=NULL;
-  *inter.taille=NULL;
+  *inter->*mot=malloc(sizeof (char));
+  *inter->taille=malloc(xmax*ymax * sizeof (int));
   *inter.xmin=NULL;
   *inter.ymin=NULL;
   *inter.xmax=NULL;
-  *inter.ymax=NULL;
+  *inter.ymax=NULL; 				/*A VERIFIER*/
 
 }
 
@@ -91,9 +91,12 @@ void inter_interpreter(Interprete *inter, float factor, Tortue *tortue, char *no
 
 int inter_generer(int niveau_max, Grammaire *g, Interprete *t)
 {
-  *t.*mot= /*Axiome a mettre ici*/
+  *t->*mot= *g.axiome;
+  for(int i=0;i<niveau_max;i++){
+   
+  }
   
-
+ 			/*A FAIRE! FONCTION LA PLUS COMPLEXE....*/
 
 }
 
@@ -101,7 +104,18 @@ int inter_generer(int niveau_max, Grammaire *g, Interprete *t)
  (donc tous les caractères sauf F,f,+,-,[ et ]) */
 
 void inter_nettoyer(Interprete *inter){
- 
+ char motTemp[]= *inter.*mot;
+ char motARenvoyer[];
+ int i=0;
+ int j=0;
+ while(motTemp[i] != '\0'){
+  if(motTemp[i]=='F' || motTemp[i]=='f' || motTemp[i]=='+' || motTemp[i]=='-' || motTemp[i]=='[' || motTemp[i]==']'){
+    motARenvoyer[j]=motTemp[i];
+    j++;
+  }
+  i++;
+ }
+ *inter.*mot=motARenvoyer[];
 }
 
 
@@ -109,17 +123,21 @@ void inter_nettoyer(Interprete *inter){
 permettant de gérer la boite englobante*/
 void inter_calc_dim(Interprete *inter, Tortue *tortue)
 {
-
+  *inter.xmin=*tortue.x*co*dir;
+  *inter.ymin=*tortue.y*si*dir;
+  *inter.xmax=*tortue.x*co*dir_max;
+  *inter.ymax=*tortue.y*si*dir_max;	/*A VERIFIER*/
 }
 
 /*Permet l'exécution d'une seule commande graphique, en mettant à jour la pile et la tortue utilisées.*/
 Pile inter_transition(Pile p, char cmd, Tortue *tortue)
 {
-
+					/*A FAIRE*/
 }
 
 /*Permet de libérer les ressources dynamiques utilisées par la structure.*/
 void inter_liberer(Interprete *inter)
 {
-
+ free(*inter->*mot);
+ free(*inter->taille);			/*A VERIFIER*/
 }

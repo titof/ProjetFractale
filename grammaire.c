@@ -1,7 +1,7 @@
 #include <stdio.c>
 #include <stdio.h>
 #include <string.h>
-#include "Grammaire.h"
+#include "grammaire.h"
 
 
 
