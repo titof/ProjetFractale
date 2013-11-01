@@ -1,67 +1,53 @@
 #include <stdio.c>
 #include <stdio.h>
+#include <string.h>
 #include "Grammaire.h"
 
 
 
-void grammaire_lire(char *nomfic, Grammaire *g){
+void grammaire_lire(char *nomfic, Grammaire *g)
+{
+  FILE *fichier;
+  *fichier = NULL;
 
-  FILE *pfo ;
-  pfo = fopen((nomfic), "r");
-  
-  if(!pfo) {
-    printf("Ouverture du fichier %s impossible\n", nomfic);
-    exit(2);
+  fichier = fopen(nomfic,"r");
+  if (fichier == NULL){
+    printf("Impossible d'ouvrir le fichier");
+    exit(0);
   }
-  /* lecture nom de la fractale */
-  fscanf(pfo, "%s\n",g->titre);
-  /* lecture nombre de directions */
-  fscanf(pfo,"%d\n",&(g->turtle_dir_max));
-  /* lecture de la direction initiale */
-  fscanf(pfo,"%d\n",&(g->turtle_dir_init));
-  /* lecture de l'axiome */
-  fscanf(pfo,"%s\n",g->axiome);
-  /* aucune regles au depart */
-  g->nb_dir = 0;
-  while (fscanf(pfo, "%c ->%s\n", &(g->car[g->nb_dir]), g->regle[g->nb_dir]) != (EOF))
-    { 
-      
-      /* calcul de la longueur de la partie droite de la regle */
-      g->long_regle[g->nb_dir] = strlen(g->regle[g->nb_dir]);
-      g->nb_dir++;
-    }
-  fclose(pfo);
+
+  fscanf(fichier,"%s\n",&g->nom);
+  fscanf(fichier,"%d\n",&g->turtle_dir_max);
+  fscanf(fichier,"%d\n",&g->turtle_dir_init);
+  fscanf(fichier,"%s\n",&g->axiome);
+  fscanf(fichier,"%c->%s\n",&g->car,&g->regle);
 }
 
 void grammaire_afficher(Grammaire g)
 {
+  
+  printf("Nom : %s\n", g.nom);
+  printf("Nombre de directions : %d\n", g.turtle_dir_max);
+  printf("Direction de départ : %d\n", g.turtle_dir_init);
+  printf("Axiome : %s\n", g.axiome);
+  
+  
+}
+
+void grammaire_trouver(Grammaire *g, char cmd)
+{
   int i = 0;
-  
-  printf("Nom de la grammaire : %s\n", g.titre);
-  printf("Nombre de directions : %d\n", g.nb_dir);
-  printf("Direction initiale : %d\n", g.turtle_dir_init);
-  printf("Axiome : s\n", g.axiome);
-  
-  while (i < 10
-         && strcmp(&g.car[i], ""))
-    {
-      printf("Regle de production %d : ", i + 1);
-      printf("%c->%s\n", g.car[i], g.regle[i]);
+  int j = 0;
+
+  while (g->car[i] !=NULL && j == 0){
+    if (g->car[i] == cmd){
+      j = 1;
       i++;
     }
-}
-
-void grammaire_trouver(Grammaire *g, char cmd){
-
- FILE *pfo ;
- int i=0;
- tab = malloc( sizeof char);
- while (fscanf(pfo, "%c ->%s\n", &(g->car[g->nb_dir]),g->regle[g->nb_dir]) != (EOF)){
- 	if (fscanf(pfo, "%c",commande)==cmd){
-	 
-	}
- }
-
-
-
-}
+  }
+  if (j=1){
+    return -1;
+  }else{
+    return i;
+  }
+} 
