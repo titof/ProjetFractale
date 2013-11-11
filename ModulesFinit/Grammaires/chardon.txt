@@ -1,0 +1,5 @@
+chardons
+12
+4
+F+F+F+F+F+F+F
+F->F[-F][+F]F

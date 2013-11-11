@@ -1,0 +1,9 @@
+Sapin
+20
+0
+SLFFF
+S->[+++G][---G]TS
+G->+H[-G]L
+H->-G[+H]L
+T->TL
+L->[-FFF][+FFF]F
