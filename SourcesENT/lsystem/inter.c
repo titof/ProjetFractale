@@ -6,6 +6,8 @@
 #include "inter.h"
 #include "grammaire.h"
 #include "tools.h"
+#include "tortue.h"
+#include "pile.h"
 
 
 
@@ -15,17 +17,20 @@
 void inter_init(Interprete *inter)
 {
  
-  *inter->taille=NULL;
+  inter->taille=0;
+  inter->mot = NULL;
+  inter->xmin = 0;
+  inter->ymin = 0;
+  inter->xmax = 0;
+  inter->ymax = 0;
+
   motc=malloc(sizeof (taille)); /*If a ajouter*/
   if(motc==NULL){
    printf("Problème lors de l'allocation mémoire...");
    exit(1);
   }
-  *inter->*mot->motc=NULL;
-  *inter.xmin=NULL;
-  *inter.ymin=NULL;
-  *inter.xmax=NULL;
-  *inter.ymax=NULL; 				/*A VERIFIER*/
+
+  mot = motc;
 
 }
 
@@ -97,12 +102,14 @@ void inter_interpreter(Interprete *inter, float factor, Tortue *tortue, char *no
 
 int inter_generer(int niveau_max, Grammaire *g, Interprete *t)
 {
-  t->*mot= *g.axiome;
-  for(int i=0;i<niveau_max;i++){
-    motc=
-  }
+
+  int i = 0;
+
+  t->mot = g->axiome;
   
- 			/*A FAIRE! FONCTION LA PLUS COMPLEXE....*/
+  while (i < niveau_max){
+    i = i + 1;
+  }
 
 }
 
@@ -110,18 +117,19 @@ int inter_generer(int niveau_max, Grammaire *g, Interprete *t)
  (donc tous les caractères sauf F,f,+,-,[ et ]) */
 
 void inter_nettoyer(Interprete *inter){
- char motTemp[]= inter->mot;
- char motARenvoyer[];
+ char motTemp = inter->mot[j];
+ char motARenvoyer[inter->taille];
  int i=0;
  int j=0;
- while(motTemp[i] != '\0'){
-  if(motTemp[i]=='F' || motTemp[i]=='f' || motTemp[i]=='+' || motTemp[i]=='-' || motTemp[i]=='[' || motTemp[i]==']'){
-    motARenvoyer[j]=motTemp[i];
-    j++;
+ while(motTemp != '\0'){
+  if(motTemp=='F' || motTemp=='f' || motTemp=='+' || motTemp=='-' || motTemp=='[' || motTemp==']'){
+    motARenvoyer[j]=motTemp;
+    j = j + 1;
+    i = i + 1;
   }
-  i++;
+  i = i + 1;
  }
- inter->mot=motARenvoyer[];
+ inter->mot=motARenvoyer;
 }
 
 
@@ -152,6 +160,5 @@ Pile inter_transition(Pile p, char cmd, Tortue *tortue)
 /*Permet de libérer les ressources dynamiques utilisées par la structure.*/
 void inter_liberer(Interprete *inter)
 {
- free(inter->mot);
-			/*A VERIFIER*/
+  free(inter->mot);
 }
