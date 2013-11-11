@@ -25,9 +25,9 @@ Pile pile_empiler(Pile p, Tortue *t)
     printf("Allocation mémoire impossible...\n");
     exit(1);
   }
-  l->x = t.x;
-  l->y = t.y;
-  l->dir = t.dir;
+  l->x = t->x;
+  l->y = t->y;
+  l->dir = t->dir;
   l->suc = p;
  
   return (l);
@@ -36,10 +36,13 @@ Pile pile_empiler(Pile p, Tortue *t)
 /* Dépile un élément de p pour rempiler t et retourne la nouvelle pile p */
 Pile pile_depiler(Pile p, Tortue *t)
 {
-  Pile l = NULL;
+  Pile l = p;
 
-  if(!pile_vide(p)){
-    l = p -> suc;
+  if(pile_vide(p) != NULL){
+    t->x = l->suc->x;
+    t->y = l ->suc->y;
+    t->dir = l->suc->dir;
+    l = l->suc;
     free(p);
   }else{
     printf("Suppression de la liste impossible");
@@ -51,16 +54,17 @@ Pile pile_depiler(Pile p, Tortue *t)
 /* Affiche le contenu de la pile */
 void pile_afficher(Pile p)
 {
-  Pile *tmp;
-  if(p == NULL){
-    printf("Il n'y a rien dans la pile");
-    exit(0)
-  }else{
-    tmp = p->suc
-    while(tmp != NULL){
+  Pile *tmp=p;
+
+  if(p != NULL){
+    while(tmp->suc != NULL){
       printf("X: %f, Y: %f, Direction: %d", p->x,p->y,p->dir);
-      tmp = p->suc;
-   }
+      tmp = tmp->suc;
+    }
+  }else{
+    printf("Il n'y a rien dans la pile");
+    exit(0);
+  }
     if(tmp = NULL){
       printf("X: %f, Y: %f, Direction: %d", tmp.x,tmp.y,tmp.dir);
     }
